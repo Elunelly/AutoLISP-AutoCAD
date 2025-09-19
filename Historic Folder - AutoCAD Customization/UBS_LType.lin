@@ -1,0 +1,263 @@
+
+;;
+;;  Fichier Définition Type de ligne ISO d'AutoCAD
+;;  Version 2.0
+;;
+;;  Copyright 2018 Autodesk, Inc.  All rights reserved.
+;;
+;;  Use of this software is subject to the terms of the Autodesk license 
+;;  agreement provided at the time of installation or download, or which 
+;;  otherwise accompanies this software in either electronic or hard copy form.
+;;
+;;  Remarque: afin de faciliter la migration de ce fichier lors de la mise à 
+;;  niveau vers une version ultérieure d'AutoCAD, il est recommandé d'ajouter
+;;  vos informations de personnalisation à la section Types de lignes
+;;  définis par l'utilisateur à la fin de ce fichier.
+;;
+;;  personnalisé à l'échelle ISO
+;;
+
+*BORDURE,Bordure __ __ . __ __ . __ __ . __ __ . __ __ .
+A, 0.5000, -0.2500, 0.5000, -0.2500, 0, -0.2500
+*BORDURE2,Bordure (x.5) __.__.__.__.__.__.__.__.__.__.__.
+A, 0.2500, -0.1250, 0.2500, -0.1250, 0, -0.1250
+*BORDUREX2,Bordure (x2) ____  ____  .  ____  ____  .  ___
+A, 1.0000, -0.5000, 1.0000, -0.5000, 0, -0.5000
+
+*AXES,Axes ____  _  ____  _  ____
+A, 0.5000, -0.1000, 0.1000, -0.1000 
+*AXES2,Axes (x.5) __ _ __ _ __
+A, 0.2500, -0.0500, 0.0500, -0.0500 
+*AXESX2,Axes (x2) ________  __  ________  __  _____
+A, 1.0000, -0.2000, 0.2000, -0.2000 
+
+*TIRETPT,Tiret point __ . __ . __ . __ . __ . __ . __ . __
+A, 0.5000, -0.1500, 0, -0.1500
+*TIRETPT2,Tiret point (x.5) _._._._._._._._._._._._._._._.
+A, 0.2500, -0.0750, 0, -0.0750
+*TIRETPTX2,Tiret point (x2) ____  .  ____  .  ____  .  ___
+A, 1.0000, -0.3000, 0, -0.3000
+
+*DIVISE,Divisé ____ . . ____ . . ____ . . ____ . . ____
+A, 0.5000, -0.2500, 0, -0.2500, 0, -0.2500
+*DIVISE2,Divisé (x.5) __..__..__..__..__..__..__..__.._
+A, 0.2500, -0.1250, 0, -0.1250, 0, -0.1250
+*DIVISEX2,Divisé (x2) ________  .  .  ________  .  .  _
+A, 1.0000, -0.5000, 0, -0.5000, 0, -0.5000
+
+*POINTILLE,Pointillé . . . . . . . . . . . . . . . . . . . . . . . .
+A, 0, -0.2500
+*POINTILLE2,Pointillé (x.5) ........................................
+A, 0, -0.1250
+*POINTILLEX2,Pointillé (x2) .  .  .  .  .  .  .  .  .  .  .  .  .  .
+A, 0, -0.5000
+
+*CACHE,Caché __ __ __ __ __ __ __ __ __ __ __ __ __ __
+A, 0.2500, -0.1250
+*CACHE2,Caché (x.5) _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+A, 0.1250, -0.0625
+*CACHEX2,Caché (x2) ____ ____ ____ ____ ____ ____ ____ 
+A, 0.5000, -0.2500
+
+*FANTOME,Fantôme ______  __  __  ______  __  __  ______ 
+A, 1.2500, -0.2500, 0.2500, -0.2500, 0.2500, -0.2500
+*FANTOME2,Fantôme (x.5) ___ _ _ ___ _ _ ___ _ _ ___ _ _
+A, 0.6250, -0.1250, 0.1250, -0.1250, 0.1250, -0.1250
+*FANTOMEX2,Fantôme (x2) ____________    ____    ____   _
+A, 2.5000, -0.5000, 0.5000, -0.5000, 0.5000, -0.5000
+
+;;  Types de lignes complexes
+;;
+;;  Des types de lignes complexes ont été ajoutés à ce fichier.
+;;  Vous trouverez ces types de lignes définis dans le fichier LTYPESHP.LIN de la
+;;  Release 13 ainsi qu'intégrés dans le fichier ACAD.LIN de la
+;;  Release 14.
+;;  
+;;  Ces définitions de types de lignes utilisent LTYPESHP.SHX.
+;;
+
+*LIMITE1,Ligne-cercles ----0-----0----0-----0----0-----0--
+A,0.7500,-0.1500,[CIRC1,ltypeshp.shx,x=-0.1500,s=0.1500],-0.1500,1.5000
+
+*LIMITE2,Ligne-carrés ----[]-----[]----[]-----[]----[]---
+A,0.7500,-0.1500,[BOX,ltypeshp.shx,x=-0.1500,s=0.1500],-0.1500,1.5000
+
+*RAILS,Rails -|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-|-
+A,0.2000,[TRACK1,ltypeshp.shx,s=0.2000],0.2000
+
+*ISOLATION,Isolation SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+A,0.0001,-0.1000,[BAT,ltypeshp.shx,x=-0.1000,s=0.1000],-0.2000,[BAT,ltypeshp.shx,r=180,x=0.1000,s=0.1000],-0.1000
+
+*GAZ,Gaz ----GAZ----GAZ----GAZ----GAZ----GAZ----GAZ--
+A,1.0000,-0.2000,["GAZ",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*ZIGZAG,Zig zag /\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/\/
+A,0.0001,-0.2000,[ZIG,ltypeshp.shx,x=-0.2000,s=0.2000],-0.4000,[ZIG,ltypeshp.shx,r=180,x=0.2000,s=0.2000],-0.2000
+
+;;
+;;  Types de lignes définis par l'utilisateur
+;;
+;;  Ajoutez à cette section tous les types de lignes que
+;;  vous définissez afin qu'ils soient correctement migrés
+;;  lors de la mise à niveau vers une version ultérieure d'AutoCAD.  
+;;  Si des définitions de types de lignes en double sont trouvées dans
+;;  ce fichier, les définitions de la section Types de lignes définis par
+;;  l'utilisateur auront la priorité sur les définitions figurant plus haut dans ce fichier.
+;;
+
+*Câble AC-BT,Ond./CAM->TGBT ----AC-BT----AC-BT----AC-BT--
+A,1.0000,-0.1000,["AC-BT",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.9580
+
+*Câble de chaines,Mod.->BJ ----DC-String----DC-String----DC-String--
+A,1.0000,-0.1000,["DC-String",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-1.6540
+
+*Câble de groupe,BJ->Ond. ----DC-Group----DC-Group----DC-Group--
+A,1.0000,-0.1000,["DC-Group",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-1.4900
+
+*COM,COM ----COM----COM----COM----COM--
+A,1.0000,-0.1000,["COM",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*CUNU,Cuivre Nu (MALT) ----CuNu----CuNu----CuNu----CuNu--
+A,1.0000,-0.1000,["CuNu",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.7900
+
+*CY,LiYCY ----CY----CY----CY----CY--
+A,1.0000,-0.1000,["CY",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*ALIM 3G,ALIM 3G ----ALIM 3G..----ALIM 3G..----ALIM 3G..----ALIM 3G..--
+A,1.0000,-0.1000,["ALIM 3G..",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-1.6540
+
+*EP,Eau Pluviale ----EP----EP----EP----EP--
+A,1.0000,-0.1000,["EP",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*ETHERNET,ETHERNET ----ETHERNET----ETHERNET----ETHERNET----ETHERNET--
+A,1.0000,-0.1000,["ETHERNET",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-1.4900
+
+*FIBRE,CAM/PDT->PDT ----FIBRE----FIBRE----FIBRE----FIBRE--
+A,1.0000,-0.1000,["FIBRE",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.9580
+
+*Câble HTB,HTB ----HTB----HTB----HTB----HTB--
+A,1.0000,-0.1000,["HTB",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*Câble HTA,HTA ----HTA----HTA----HTA----HTA--
+A,1.0000,-0.1000,["HTA",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*LAN,LAN ----LAN----LAN----LAN----LAN--
+A,1.0000,-0.1000,["LAN",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*RS485,RS485 ----RS485----RS485----RS485----RS485--
+A,1.0000,-0.1000,["RS485",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.9580
+
+*TEL,TEL ----TEL----TEL----TEL----TEL--
+A,1.0000,-0.1000,["TEL",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*TOR,TOR ----TOR----TOR----TOR----TOR--
+A,1.0000,-0.1000,["TOR",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*VJ,Vert-Jaune (MALT) ----VJ----VJ----VJ----VJ--
+A,1.0000,-0.1000,["VJ",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*Câble CR1-C1,CR1-C1 ----CR1-C1----CR1-C1----CR1-C1----CR1-C1--
+A,1.0000,-0.03000,["CR1-C1",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-1.1075
+
+*CUNU 50²,Cuivre Nu 50² (MALT) ----50²----50²----50²----50²--
+A,1.0000,-0.1000,["50²",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*CUNU 25²,Cuivre Nu 25² (MALT) ----25²----25²----25²----25²--
+A,1.0000,-0.1000,["25²",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*Câble DC,DC ----DC----DC----DC----DC--
+A,1.0000,-0.1000,["DC",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*AC-BT_3G4_1000R2V, 3G4 ----3G4----3G4----3G4----3G4--
+A,1.0000,-0.1000,["3G4",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*DC-BT_95²_1000R2V, 95² ----95²----95²----95²----95²--
+A,1.0000,-0.1000,["95²",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*AC-BT_300²_1000R2V, 300² ----300²----300²----300²----300²--
+A,1.0000,-0.1000,["300²",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.7900
+
+*Câble DC-TBT,24V ----DC-TBT----DC-TBT----DC-TBT--
+A,1.0000,-0.1000,["DC-TBT",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-1.1075
+
+*Tube IRO,IRO ----IRO----IRO----IRO----IRO--
+A,1.0000,-0.1000,["IRO",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*Talus, Barbule |_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|
+A,0.1,["|",MonoSpace,S=0.1,R=0.0,X=-0.0,Y=0.034],0.1,["|",MonoSpace,S=0.2,R=0.0,X=0.004,Y=0.068],0.1
+
+*ALIM,ALIM ----ALIM----ALIM----ALIM----ALIM--
+A,1.0000,-0.1000,["ALIM",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.7900
+
+*LV Cable,Low Voltage ----LV----LV----LV----LV--
+A,1.0000,-0.1000,["LV",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*BC Cable,Bare Copper ----BC----BC----BC----BC--
+A,1.0000,-0.1000,["BC",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*ES Cable,Emergency Stop ----ES----ES----ES----ES--
+A,1.0000,-0.1000,["ES",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*GY Cable,Green Yellow ----GY----GY----GY----GY--
+A,1.0000,-0.1000,["GY",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*HV Cable,High Voltage ----HV----HV----HV----HV--
+A,1.0000,-0.1000,["HV",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*MV Cable,Medium Voltage ----MV----MV----MV----MV--
+A,1.0000,-0.1000,["MV",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*Câble CC,CC ----CC----CC----CC----CC--
+A,1.0000,-0.1000,["CC",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*Câble BT,BT ----BT----BT----BT----BT--
+A,1.0000,-0.1000,["BT",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*CDC,Chemin de cable ----CDC----CDC----CDC----CDC--
+A,1.0000,-0.1000,["CDC",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*PWR,Power cable ----PWR----PWR----PWR----PWR--
+A,1.0000,-0.1000,["PWR",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.6100
+
+*CT,Cable Trays ----CT----CT----CT----CT--
+A,1.0000,-0.1000,["CT",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*AU,Arret d'Urgence ----AU----AU----AU----AU--
+A,1.0000,-0.1000,["AU",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*HD,Hydrological Ditch ----HD----HD----HD----HD--
+A,1.0000,-0.1000,["HD",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*LV,Low Voltage ----LV----LV----LV----LV--
+A,1.0000,-0.1000,["LV",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.4430
+
+*AC-LV,AC Low Voltage ----AC-LV----AC-LV----AC-LV--
+A,1.0000,-0.1000,["AC-LV",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.9580
+
+*PANNE,Panne ----PANNE----PANNE----PANNE----PANNE--
+A,1.0000,-0.1000,["Panne",MonoSpace,S=0.2000,U=0.0,X=-0.0,Y=-0.1000],-0.9580
+
+;;  Aide:
+;;  A:Longueur de la partie visible du trait
+;;  Longueur de l'espace vide (valeur négative)
+;;  "FIBRE": texte visible dans le style de ligne
+;;  Standard: Style de texte utilisé
+;;  S: Echelle appliquée au texte
+;;  U: Angle du texte
+;;  R: Angle relatif du texte
+;;  X: Position en X de départ du texte
+;;  Y: Position en Y de départ du texte
+;;  "-1.508": Position de l'espace après le texte
+
+;; MàJ November 2022 by MAC
+
+;; Commentaires MAC :
+;; garder "[S=0.2000,U=0.0,X=-0.0,Y=-0.1000],...." et pour la fin :
+;; 2 caractères : -0.4430 répéter 4 fois
+;; 3 caractères : -0.6100
+;; 4 caractères : -0.7900 
+;; 5 caractères : -0.9580 répété 3 fois
+;; 6 caractères : -1.1075
+;; En moyenne multiplier par x 1.26 pour ajouter un caractère (lettre, chiffre ou symbole) 
+;; Attention la police "MonoSpace" ne fonctionne pas sans les LISP si non remplacer "MonoSpace" par "STANDARD" dans le codage
+;; La police "MonoSpace" est choisie pour garder le lettrage en taille uniforme donc la privilégier

@@ -1,0 +1,92 @@
+(defun VPLAYERSBW (/ layerlist name)
+  (defun RGB->BW (RGB m / R G B Rm Gm Bm)
+    (if (and (listp m) (= 1.0 (apply '+ m)))
+      (setq c (apply '+ (mapcar '* RGB m)))
+      (setq c (apply '+ (mapcar '* RGB (list (/ 1. 3.) (/ 1. 3.) (/ 1. 3.)))))
+    )
+    (mapcar 'round (list c c c))
+  )
+  (defun round (n)
+    (fix (+ n 0.5))
+  )
+  (defun LM:True->RGB ( c )
+    (mapcar '(lambda ( x ) (lsh (lsh (fix c) x) -24)) '(8 16 24))
+  )
+  (defun LM:ACI->RGB ( c / o r )
+    (if (setq o (vla-getinterfaceobject (LM:acapp) (strcat "autocad.accmcolor." (substr (getvar 'acadver) 1 2))))
+      (progn
+        (setq r
+          (vl-catch-all-apply
+            '(lambda ( )
+              (vla-put-colorindex o c)
+              (list (vla-get-red o) (vla-get-green o) (vla-get-blue o))
+             )
+          )
+        )
+        (vlax-release-object o)
+        (if (vl-catch-all-error-p r)
+          (prompt (strcat "\nError: " (vl-catch-all-error-message r)))
+          r
+        )
+      )
+    )
+  )
+  (defun LM:acapp nil
+    (eval (list 'defun 'LM:acapp 'nil (vlax-get-acad-object)))
+    (LM:acapp)
+  )
+  (defun VP-B&W-Layers (layerlist name / *error* acet i ce dxf l layer color62 color420)
+    (defun *error* (msg)
+      (if ce (setvar "CMDECHO" ce))
+      (if acet (acet-ui-progress))
+      (princ msg)
+    )
+    (defun dxf (key lst)
+      (if (assoc key lst)
+        (cdr (assoc key lst))
+      )
+    )
+    (setq
+      ce (getvar "CMDECHO")
+      acet (acet-ui-progress "VPLAYERSBW en cours d'exécution..." (length layerlist))
+      i 0
+    )
+    (setvar "CMDECHO" 0)
+    (mapcar
+      '(lambda (l / layer color62 color420)
+        (setq
+          layer (entget (tblobjname "LAYER" l))
+          color62 (dxf 62 layer)
+          color420 (dxf 420 layer)
+        )
+        (if (not color420)
+          (setq color420 (lst2str (RGB->BW (LM:ACI->RGB color62) nil) ","))
+          (setq color420 (lst2str (RGB->BW (LM:True->RGB color420) nil) ","))
+        )
+        (if (/= 7 color62)
+          (command "_VPLAYER" "_Color" "_TrueColor" color420 l "_Select" name "" "")
+        )
+        (acet-ui-progress (setq i (1+ i)))
+       )
+      layerlist
+    )
+    (setq acet (acet-ui-progress))
+    (setvar "CMDECHO" ce)
+    (princ)
+  )
+  (if
+    (and
+      (setq layerlist
+        (ListBox "Sélection des calques"
+          "Choix multiple : "
+          (DXF_List (flt_tbl "LAYER" "*" nil) nil nil T nil)
+          (getvar "CLAYER")
+          2
+          nil
+        )
+      )
+      (setq name (ssname (ssget "_+.:E:S" '((0 . "VIEWPORT"))) 0))
+    )
+    (VP-B&W-Layers layerlist name)
+  )
+)

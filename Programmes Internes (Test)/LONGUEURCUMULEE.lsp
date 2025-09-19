@@ -1,0 +1,17 @@
+(defun c:LONGUEURCUMULEE (/ tot jsel i name len)
+  (and
+    (setq tot 0)
+    (setq jsel (ssget '((0 . "ARC,CIRCLE,ELLIPSE,*LINE"))))
+    (repeat (setq i (sslength jsel))
+      (setq
+        name (ssname jsel (setq i (1- i)))
+        len (vlax-curve-getDistAtParam (vlax-ename->vla-object name) (vlax-curve-getEndParam (vlax-ename->vla-object name)))
+        tot (+ len tot)
+      )
+    )
+    (sssetfirst nil jsel)
+    (null (vla-regen (vla-get-ActiveDocument (vlax-get-acad-object)) acActiveViewport))
+    (princ (strcat "\nLongueur totale des objets = " (rtos tot 2 2)))
+  )
+  (princ)
+)

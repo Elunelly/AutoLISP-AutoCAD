@@ -1,0 +1,322 @@
+Ce fichier à pour but de fournir quelques explications succinctes sur l'utilisation d'AutoCAD et du dossier "LISP" (arborescence) :
+
+VARIABLES SYSTEMES :
+Utiliser la commande MONITEURVARSYS pour gérer vos préférences pour certaines variables systèmes et vous prévenir en cas de modification de valeur !
+
+---{  CMDECHO  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   1 (peut être modifiée par un programme LISP)
+
+Détermine si les invites et les entrées sont reprises lors de la fonction de commande AutoLISP.
+Type:             Entier
+Enregistré dans:  Pas enregistré
+Valeur initiale : 1
+
+0 → Désactive l'affichage à l'écran.
+
+1 → Active l'affichage à l'écran.
+
+---{  DYNMODE  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   0 (ou 1 selon les habitudes de dessin)
+
+Active et désactive les fonctions de saisie dynamique.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 3
+Lorsque toutes les fonctions sont activées, le contexte régit les éléments qui sont affichés.
+Lorsque DYNMODE est définie sur une valeur négative, les fonctions Saisie dynamique ne sont pas activées, mais le paramètre est enregistré.
+
+0 → Toutes les fonctions Saisie dynamique, y compris les invites dynamiques, sont désactivées.
+
+1 → Saisie de pointeur activée.
+
+2 → Saisie de cote activée.
+
+3 → Saisie du pointeur et saisie de cote activées.
+
+Si les invites dynamiques sont activées (DYNPROMPT a la valeur 1), elles s'affichent lorsque DYNMODE a la valeur 1, 2 ou 3.
+Lorsque la saisie de cote est activée (DYNMODE = 2 ou 3), le programme passe en saisie de pointeur lorsque vous entrez une virgule, le symbole < ou lorsque vous sélectionnez plusieurs poignées.
+Lorsque DYNMODE est définie sur 1, 2 ou 3, vous pouvez désactiver temporairement toutes les fonctions en appuyant de manière prolongée sur la touche de remplacement temporaire, F12.
+Les paramètres se trouvent dans l'onglet Saisie dynamique de la boîte de dialogue Paramètres de dessin.
+
+---{  FILETABPREVIEW  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   0
+
+Détermine le type d'aperçu lorsque vous passez le curseur de la souris sur un onglet de fichier de dessin.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 1
+
+0 → Affiche une liste qui inclut le modèle et tous les noms de présentation.
+
+1 → Affiche un jeu d'images miniatures.
+
+---{  FILETABTHUMBHOVER  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   0
+
+Indique si la présentation ou le modèle correspondant se charge dans la fenêtre de dessin lorsque vous passez le curseur sur la miniature d'un onglet de fichier.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 1
+
+0 → Ne charge pas la présentation ou le modèle dans la fenêtre de dessin lorsque vous passez le curseur sur la miniature d'un onglet de fichier.
+
+1 → Charge la présentation ou le modèle dans la fenêtre de dessin lorsque vous passez le curseur sur la miniature d'un onglet de fichier.
+
+---{  LAYOUTREGENCTL  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   1
+
+Indique comment la liste d'affichage est mise à jour dans l'onglet Objet et dans les onglets de présentation.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 2
+Pour chaque onglet, la liste d'affichage est mise à jour soit en régénérant le dessin, soit en sauvegardant la liste d'affichage en mémoire et en ne régénérant que les objets modifiés lorsque vous choisissez cet onglet.
+La modification de la valeur LAYOUTREGENCTL peut améliorer les performances.
+
+0 → Le dessin est régénéré chaque fois que vous changez d'onglet.
+
+1 → Pour l'onglet Objet et la dernière présentation courante, la liste d'affichage est enregistrée en mémoire et les régénérations sont supprimées lorsque vous passez d'un onglet à l'autre.
+    Pour toutes les autres présentations, les régénérations se produisent toujours lorsque vous choisissez ces onglets.
+
+2 → Le dessin est régénéré la première fois que vous accédez à chaque onglet. Pour le reste de la session de dessin, la liste d'affichage est sauvegardée en mémoire et les régénérations sont supprimées lorsque vous
+    choisissez ces onglets.
+
+Le gain de performances obtenu en modifiant LAYOUTREGENCTL dépend de plusieurs facteurs, dont la taille et le type du dessin, les objets contenus dans ce dessin, la quantité de mémoire disponible,
+et l'effet des autres dessins ou applications ouverts. Lorsque LAYOUTREGENCTL est définie sur 1 ou sur 2, le volume de mémoire supplémentaire utilisé correspond à la taille de la liste d'affichage de l'onglet Objet,
+multipliée par le nombre de fenêtres de chaque présentation pour lesquelles la liste d'affichage est enregistrée.
+
+Si LAYOUTREGENCTL est définie sur 1 ou sur 2, et si le traitement semble particulièrement lent, de manière générale ou lorsque vous changez d'onglet parmi ceux pour lesquels la liste d'affichage est enregistrée,
+essayez d'utiliser les valeurs 0 ou 1 afin de trouver l'équilibre optimal pour votre environnement de travail. Pour obtenir des informations supplémentaires relatives aux paramètres de performance, voir l'onglet Système
+(dans la boîte de dialogue Options).
+
+Quelle que soit la valeur de LAYOUTREGENCTL, si vous redéfinissez un bloc ou annulez l'accès à un onglet, le dessin est régénéré la première fois que vous accédez à un onglet contenant des fenêtres enregistrées.
+
+---{  LISPSYS  }---
+
+   DEFINIR CETTE VARIABLE SUR →   1
+
+Contrôle l'environnement de développement AutoLISP par défaut et l'éditeur lancé avec la commande VLISP.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 1
+Remarque : AutoCAD doit être redémarré après modification de la valeur de la variable système LISPSYS pour changer d'environnement de développement AutoLISP.
+
+0 → L'environnement de développement intégré Visual LISP est défini comme éditeur par défaut. Toutefois, les fonctions AutoLISP ne prennent pas entièrement en charge les caractères Unicode.
+    Lorsqu'ils sont enregistrés et compilés, les fichiers source AutoLISP (LSP) utilisent le jeu de caractères ASCII (MBCS).
+    Remarque : Ce paramètre affecte le comportement d'AutoCAD 2020 et des versions antérieures, et est uniquement pris en charge sous Windows.
+
+1 → Visual Studio (VS) Code est défini comme éditeur par défaut, et les fonctions AutoLISP prennent entièrement en charge les caractères Unicode.
+    Lorsqu'ils sont enregistrés, les fichiers source AutoLISP (LSP) utilisent le jeu de codage défini dans VS Code et, une fois compilés, ils utilisent le jeu de caractères Unicode.
+
+2 → Visual Studio (VS) Code est défini comme éditeur par défaut, et les fonctions AutoLISP prennent entièrement en charge les caractères Unicode.
+    Lorsqu'ils sont enregistrés, les fichiers source AutoLISP (LSP) utilisent le jeu de codage défini dans VS Code et, une fois compilés, ils utilisent le jeu de caractères ASCII (MBCS).
+
+---{  MENUBAR  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   1
+
+Contrôle l'affichage de la barre de menus (Fichier, Edition, Affichage, ...).
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 0
+
+0 → Masque la barre de menus.
+
+1 → Affiche la barre de menus.
+
+---{  PDFSHX  }---
+
+   DEFINIR CETTE VARIABLE SUR →   0
+
+Indique si les objets texte utilisant des polices SHX sont stockés dans des fichiers PDF sous forme de commentaires lorsque vous exportez un dessin dans un fichier PDF.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 1
+Comme le texte qui utilise des polices SHX n'est pas pris en charge au format PDF, les dessins exportés sous forme de fichiers PDF peuvent stocker ce texte sous forme de commentaires intitulés "Texte AutoCAD SHX".
+Toutefois, certains anciens visualiseurs PDF affichent ces commentaires dans le dessin parallèlement à d'autres commentaires, ce qui n'est généralement pas souhaitable.
+
+0 → Aucun commentaire supplémentaire n'est créé lors de l'exportation d'un fichier PDF. Le texte qui utilise les polices SHX est préservé visuellement sous forme d'objets géométriques.
+
+1 → Crée des commentaires à partir des objets texte qui utilisent des polices SHX.
+
+---{  PICKADD  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   2
+
+Détermine si les sélections suivantes remplacent le jeu de sélection courant ou s'y ajoutent.
+Type:             Entier
+Enregistré dans:  Paramètres utilisateur
+Valeur initiale : 2
+
+0 → Désactive PICKADD. Les derniers objets sélectionnés deviennent le jeu de sélection. Les objets préalablement sélectionnés sont automatiquement supprimés du jeu de sélection.
+
+1 → Active PICKADD. Chaque objet sélectionné, individuellement ou par fenêtrage, est ajouté au jeu de sélection courant.
+
+2 → Active PICKADD. Chaque objet sélectionné, individuellement ou par fenêtrage, est ajouté au jeu de sélection courant. Si la commande SELECT est utilisée, conserve les objets sélectionnés à la fin de la commande.
+
+Remarque : Pour ajouter ou supprimer des objets dans le jeu de sélection, maintenez la touche MAJ enfoncée pendant que vous les sélectionnez.
+Dans AutoCAD, vous pouvez sélectionner les sous-objets des composants de maillages, surfaces et solides 3D en maintenant la touche CTRL enfoncée pendant la sélection.
+
+---{  PICKFIRST  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   1
+
+Détermine si vous pouvez sélectionner des objets avant d'exécuter une commande (présélection).
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 1
+
+0 → Inactif. Vous pouvez sélectionner les objets uniquement après le lancement d'une commande.
+
+1 → Actif. Vous pouvez également sélectionner des objets avant de lancer une commande.
+
+---{  PLINEWID  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   0.0 (pouvant être redéfinie au cours d'une session de dessin)
+
+Indique la largeur de polyligne par défaut.
+Type:             Réel
+Enregistré dans:  Dessin
+Valeur initiale : 0.0000
+
+---{  PREVIEWFILTER  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   3
+
+Exclut de l'aperçu de la sélection les types d'objets spécifiés.
+Type:             Code binaire
+Enregistré dans:  Registre
+Valeur initiale : 3
+Le paramètre est stocké sous forme de code binaire en utilisant la somme des valeurs suivantes :
+
+0 → N'exclut rien
+
+1 → Exclut les objets sur les calques verrouillés
+
+2 → Exclut les objets dans les xréfs
+
+4 → Exclut les tables
+
+8 → Exclut les objets de texte multiligne
+
+16 → Exclut les objets de hachures
+
+32 → Exclut les objets dans les groupes
+
+Appuyez sur les touches Ctrl+W pour activer/désactiver le paramètre courant.
+Lorsque l'option SELECTIONCYCLING est définie sur une valeur négative, le cycle de sélection est désactivé, mais le paramètre est enregistré.
+
+---{  SELECTIONCYCLING  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   0 ou 1 (ponctuellement 2)
+
+Contrôle les options d'affichage associées aux objets qui se chevauchent et au cycle de sélection.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 0
+Lorsque vous placez le curseur sur des objets 2D qui se chevauchent, des options s'affichent pour vous informer et vous permettre de choisir parmi les différents objets.
+
+0 → Les options d'affichage sont désactivées.
+
+1 → Un badge s'affiche lorsque vous placez le curseur sur des objets qui se chevauchent.
+
+2 → Un badge et la boîte de dialogue de sélection s'affichent.
+
+Appuyez sur les touches Ctrl+W pour activer/désactiver le paramètre courant.
+Lorsque l'option SELECTIONCYCLING est définie sur une valeur négative, le cycle de sélection est désactivé, mais le paramètre est enregistré.
+
+---{  SELECTIONEFFECT  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   1
+
+Indique l'effet visuel utilisé lorsque les objets sont sélectionnés.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 1
+
+0 → Pointillés
+
+1 → Lorsque l'accélération matérielle est activée, affiche l'effet de surbrillance avec lignes brillantes
+
+---{  SELECTIONPREVIEWLIMIT  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   10000
+
+Limite le nombre d'objets permettant d'afficher une mise en surbrillance de l'aperçu lors de la sélection d'une fenêtre ou d'une intersection.
+Type:             Entier
+Enregistré dans:  Registre
+Valeur initiale : 20000
+
+Lorsque vous sélectionnez un grand nombre d'objets à l'aide d'une méthode par fenêtrage ou intersection, la mise en surbrillance de l'aperçu peut parfois affecter les performances du programme.
+Vous pouvez réduire ce nombre lorsque vous travaillez sur des dessins de grande taille et complexes. Lorsque le jeu de sélection dépasse la valeur de ce paramètre, la mise en surbrillance de l'aperçu cesse.
+Ce paramètre n'a aucun effet si SELECTIONPREVIEW est activée.
+
+---{  SNAPANG  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   0.0
+
+Définit l'angle de rotation de la grille standard et de la grille d'accrochage pour la fenêtre courante en fonction du SCU courant.
+Type:             Réel
+Enregistré dans:  Dessin
+Valeur initiale : 0.0000
+
+Lorsque la variable SNAPANG est définie sur une valeur différente de 0, la grille de lignes ne s'affiche pas.
+Contrôle également l'orientation du curseur, pouvant créer un décalage entre les axes SCU/SCG et le curseur.
+
+---{  UCSFOLLOW  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   0
+
+Génère une vue en plan chaque fois que vous passez d'un SCU à un autre.
+Type:             Entier
+Enregistré dans:  Dessin
+Valeur initiale : 0
+Le paramètre de UCSFOLLOW est enregistré séparément pour chaque fenêtre. Si UCSFOLLOW est activée pour une fenêtre, une vue en plan est générée dans cette fenêtre chaque fois que vous changez de système de coordonnées utilisateur.
+
+0 → La modification du SCU n'a aucune incidence sur la vue courante.
+
+1 → La modification du SCU génère une vue en plan du nouveau SCU dans la fenêtre courante.
+
+Remarque : Le paramètre UCSFOLLOW est ignoré dans l'espace papier.
+
+---{  VISRETAIN  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   1
+
+Gère les propriétés des calques dépendant des xréfs.
+Type:             Entier
+Enregistré dans:  Dessin
+Valeur initiale : 1
+Contrôle la visibilité, la couleur, le type de ligne, l'épaisseur de ligne et les styles de tracé.
+Utilisez cette variable système conjointement avec la variable système VISRETAINMODE pour contrôler les remplacements de propriétés de calque xréf que vous souhaitez synchroniser automatiquement au rechargement.
+
+0 → La table des calques, telle qu'elle est stockée dans le dessin de référence (xréf) est prioritaire. Les changements apportés aux calques dépendant de références externes dans le dessin courant sont valables dans la
+    session courante uniquement et ne sont pas enregistrés avec le dessin. Lorsque vous rouvrez le dessin courant, la table du calque est chargée de nouveau depuis la référence du dessin, et le dessin courant reflète
+    tous les paramètres des propriétés de ces calques.
+
+1 → Les modifications apportées aux calques dépendant des xréfs dans le dessin courant sont prioritaires. Les paramètres du calque sont enregistrés avec la table de calque du dessin courant et restent
+    d'application d'une session à l'autre.
+
+---{  XREFOVERRIDE  }---
+
+   CONSEILLER CETTE VARIABLE SUR →   1 (ou 0 selon les dessins)
+
+Contrôle l'affichage des propriétés des objets sur des calques référencés.
+Type:             Entier
+Enregistré dans:  Dessin
+Valeur initiale : 0
+La variable système XREFOVERRIDE a une incidence sur l'affichage et le traçage, et fonctionne conjointement avec la variable système VISRETAIN.
+Si vous souhaitez que les calques de Xréfs conservent leurs paramètres de calque d'origine, il est recommandé de définir les variables système VISRETAIN et XREFOVERRIDE sur 0.
+
+0 → Lorsque les propriétés des objets (tels que la couleur, le type des lignes, l'épaisseur des lignes, la transparence ou le style de tracé) du dessin de référence externe sont définis sur DuCalque,
+    toutes les modifications apportées aux propriétés des calques de Xréfs s'affichent dans le dessin actif (comportement hérité)
+
+1 → Lorsque les propriétés visuelles des objets d'un dessin de référence externe ne sont pas définies sur DuCalque, les objets des calques Xréf sont traités comme si leurs propriétés étaient définies sur DuCalque
+    et chaque calque de référence externe peut disposer de son propre jeu de remplacements de calque.
+
+Remarque : La variable système XREFOVERRIDE s'applique uniquement aux Xréfs DWG, et non aux autres références comme les calques sous-jacents.
+

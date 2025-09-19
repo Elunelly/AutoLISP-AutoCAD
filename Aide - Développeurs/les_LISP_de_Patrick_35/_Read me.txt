@@ -1,0 +1,12 @@
+The LISP routines of this ZIP archive were created by Patrick Dewevre, also known as Patrick_35
+
+Patrick left us in March 2019.
+
+In agreement with his family, his work is made available here to the Autodesk community.
+
+
+You can contact me about this but please note that I am not in charge of the maintenance and evolution of these programs.
+
+Patrik EMIN
+French Autodesk community manager
+patrick.emin@autodesk.com

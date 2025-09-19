@@ -1,0 +1,13 @@
+(defun OverkillPoly (ent pt1 pt2 / obj odr pr1 pr2 pts)
+  (setq
+    obj (vlax-ename->vla-object ent)
+    pt1 (vlax-curve-getClosestPointTo ent pt1)
+    pt2 (vlax-curve-getClosestPointTo ent pt2)
+    odr (vl-sort (list pt1 pt2) '(lambda (a b) (< (vlax-curve-getDistAtPoint ent a) (vlax-curve-getDistAtPoint ent b))))
+    pt1 (car odr)
+    pt2 (cadr odr)
+    pr1 (vlax-curve-getParamAtPoint ent pt1)
+    pr2 (vlax-curve-getParamAtPoint ent pt2)
+    pts (Poly-DeletePoints obj '(lambda (p) (<= pr1 (vlax-curve-getParamAtPoint ent p) pr2)))
+  )
+)

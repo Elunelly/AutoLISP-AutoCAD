@@ -1,0 +1,80 @@
+(defun temp-circles-make (pt-list radius rgb / doc color obj lst)
+  (setq
+    doc (vla-get-ActiveDocument (vlax-get-acad-object))
+    color (vla-get-TrueColor (vla-Item (vla-get-layers doc) "0"))
+  )
+  (apply 'vla-setRGB (cons color rgb))
+  (mapcar
+    '(lambda (p)
+      (setq obj (vla-AddCircle (vla-get-ModelSpace doc) (vlax-3D-point p) radius))
+      (vla-put-TrueColor obj color)
+      (setq lst (cons obj lst))
+      (vlax-ldata-put "URBASOLAR" "temp-obj" lst)
+     )
+    pt-list
+  )
+  lst
+)
+
+
+(defun c:FP2LP (/ doc break name obj layer color ltype lay lst jsel i entlist)
+  (setq doc (vla-get-ActiveDocument (vlax-get-acad-object)))
+  (while (not break)
+    (initget 1 "Quitter _eXit")
+    (setq name (entsel "\nSélectionner un objet ou [Quitter] : "))
+    (cond
+      ( (= "eXit" name) (setq break T))
+      ( (setq name (car name))
+        (setq
+          obj (ConvName name 'VLA-OBJECT)
+          layer (vla-get-Layer obj)
+          color (vla-get-TrueColor obj)
+          ltype (vla-get-LineType obj)
+          lay (vla-item (vla-get-Layers doc) layer)
+          lst (cons lay lst)
+        )
+        (vla-put-TrueColor lay color)
+        (vla-put-LineType lay ltype)
+        (and
+          (setq jsel (ssget "_X" (list (cons 8 layer) (cons 6 ltype) (cons 62 (vla-get-ColorIndex color)))))
+          (repeat (setq i (sslength jsel))
+            (setq
+              name (ssname jsel (setq i (1- i)))
+              entlist (vl-remove-if '(lambda (x) (member (car x) '(6 62 420 430))) (entget name))
+            )
+            (entmod entlist)
+          )
+        )
+        (vla-put-Freeze lay 1)
+        (print (strcat "\nLe calque \"" layer "\" a été modifié avec succès..."))
+      )
+    )
+  )
+  (mapcar '(lambda (l) (vla-put-Freeze l 0)) lst)
+  (vla-regen doc acActiveViewport)
+  (princ)
+)
+
+(defun c:TMP (/ poly pt ang dist npt alt)
+  (and
+    (setq poly (ssget "_+.:E:S" '((0 . "LWPOLYLINE"))))
+    (setq poly (ssname poly 0))
+    (setq pt (car (get-pt-list poly)))
+    (setq ang (angle pt (last (get-pt-list poly))))
+    (setq npt pt)
+    (while (setq dist (getdist npt "\nNouvelle distance: "))
+      (setq
+        npt (2D-point (polar npt dist ang))
+        alt (getreal "\nAltitude pour le point: ")
+      )
+      (entmake
+        (list
+          '(0 . "POINT")
+          '(100 . "AcDbPoint")
+          (cons 10 (append npt (list alt)))
+        )
+      )
+    )
+  )
+  (princ)
+)

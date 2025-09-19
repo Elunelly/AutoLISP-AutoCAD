@@ -1,0 +1,55 @@
+(defun makeActive (ent var val)
+  (while (not ent)
+    (setq ent (car (entsel)))
+  )
+  (setvar var (eval val))
+  (princ)
+)
+
+(defun c:ActifCalque ()
+  (makeActive ent "CLAYER" (quote (cdr (assoc 8 (entget ent)))))
+)
+
+(defun c:ActifTypeDeLigne ()
+  (makeActive ent "CELTYPE" (quote (cond ((cdr (assoc 6 (entget ent)))) ("ByLayer"))))
+)
+
+(defun c:ActifEpaisseur ()
+  (makeActive ent "CELWEIGHT" (quote (cond ((cdr (assoc 370 (entget ent)))) (-1))))
+)
+
+(defun c:ActifCouleur (/ LM:True->RGB lst2str color)
+  (defun LM:True->RGB ( c )
+    (mapcar '(lambda ( x ) (lsh (lsh (fix c) x) -24)) '(8 16 24))
+  )
+  (defun lst2str (lst sep)
+    (if lst (vl-string-left-trim sep (apply 'strcat (mapcar '(lambda (x) (strcat sep (vl-princ-to-string x))) lst))))
+  )
+  (makeActive
+    "CECOLOR"
+    ent
+    (quote
+      (cond
+        ((cdr (assoc 430 (entget ent))))
+        ( (setq color (cdr (assoc 420 (entget ent))))
+          (setq color (LM:True->RGB color))
+          (strcat "RGB:" (lst2str color ","))
+        )
+        ( (setq color (cdr (assoc 62 (entget ent))))
+          (itoa color)
+        )
+        ("ByLayer")
+      )
+    )
+  )
+)
+
+(defun c:Actif (/ ent)
+  (while (not ent)
+    (setq ent (car (entsel)))
+  )
+  (c:ActifCalque)
+  (c:ActifTypeDeLigne)
+  (c:ActifEpaisseur)
+  (c:ActifCouleur)
+)
